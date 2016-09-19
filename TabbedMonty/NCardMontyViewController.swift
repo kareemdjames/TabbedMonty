@@ -107,3 +107,19 @@ class NCardMontyViewController: UIViewController {
     }
 }
 
+
+//func setUpGameButtons(v: UIView, n: totalButtons, r: buttonsPerRow) {
+//    
+//    let width = v.bounds.size.width
+//    let height = v.bounds.size.height
+//    
+//    for i in 1...howManyCards {
+//        let x = r
+//        let y = n / r
+//        
+//        
+//        
+//        let rect = CGRect(
+//        let button = UIButton.
+//        
+//}
