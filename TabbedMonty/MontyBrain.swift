@@ -10,28 +10,50 @@ import Foundation
 
 
 class MontyBrain {
-    let numCards: Int
+    let numSquares: Int
+    let numSpots: Int
     
-    init(numCards:Int){
-        self.numCards = numCards
-        setupCards()
+    init(numSquares:Int, numSpots: Int) {
+        self.numSquares = numSquares
+        self.numSpots = numSpots
+        setupSquares()
     }
     
-    fileprivate enum State{
+    fileprivate enum State {
         case hit
         case miss
     }
     
-    private  var cards = [State]()
+    private  var squares = [State]()
+    var checkerArr = [Int]()
     
-    func setupCards(){
-        cards = Array(repeating: .miss, count: numCards)
-        cards[Int(arc4random_uniform(UInt32(numCards)))] = .hit
-        
+    func generateSpot() -> Int {
+        let coor: Int
+        coor = Int(arc4random_uniform(UInt32(numSquares)))
+        return coor
     }
     
-    func checkCard(_ cardIn: Int) -> Bool{
-        assert(cardIn < cards.count)  //helps with debugging
-        return cards[cardIn] == .hit
+    func setupSquares() {
+        squares = Array(repeating: .miss, count: numSquares)
+        for _ in 1...numSpots {
+            var newCoor = generateSpot()
+            if checkerArr.contains(newCoor) && newCoor != 10 {
+                newCoor += 1
+            } else if checkerArr.contains(newCoor) && newCoor == 10 {
+                newCoor -= 1
+            } else {
+                if checkerArr.count < numSpots {
+                    checkerArr.append(newCoor)
+                } else {
+                    break
+                }
+            }
+            squares[newCoor] = .hit
+        }
+    }
+    
+    func checkSquare(_ cardIn: Int) -> Bool {
+        assert(cardIn < squares.count)  //helps with debugging
+        return squares[cardIn] == .hit
     }
 }

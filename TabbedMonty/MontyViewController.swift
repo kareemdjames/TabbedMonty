@@ -12,19 +12,19 @@ class MontyViewController: UIViewController {
     
     @IBOutlet weak var labelOutcome: UILabel!
     
-    let engine = MontyBrain(numCards: 3)
+    let engine = MontyBrain(numSquares: 3, numSpots: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        engine.setupCards()
+        engine.setupSquares()
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         labelOutcome.text = sender.currentTitle
         
-        if engine.checkCard(sender.tag - 1) {
+        if engine.checkSquare(sender.tag - 1) {
             labelOutcome.text = "Correct!"
-            engine.setupCards()
+            engine.setupSquares()
         }
         else {
             labelOutcome.text = "WRONG"
